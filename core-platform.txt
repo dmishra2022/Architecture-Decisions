@@ -1,0 +1,66 @@
+core-platform
+|
+|-----bom
+|
+|-----platform
+|
+|		|-domain-core (contains DD Primits Only)
+|		|
+|		|-outbox (Outbox framework like persist aggregates, persist outbox, commit, publish, retry and manages outbox scheduler, lease locking, idempotency, backoff)
+|		|
+|		|-eventing (Standardised Event Publishing)
+|		|
+|		|-cqrs (Only lighweight support do not want another axon framwork)
+|		|
+|		|-observability (Every Service gets OpenTelemetry, Prometheus, Micrometer, Correlation, Tracing, Audit Logging)
+|		|
+|		|-Event schema (Every event inherits this PlatformEvents)
+|		|
+|		|-security (Share Enterprise Security like JWT validator, Role Extractor, Permission Evaluation, Audit identities
+|		|
+|		|-Search projection (For CQRS projections capabilities like Elastic search indexing, retry, bulk writes, mapping)
+|		|
+|		|-workflow (Durable workflow using Temporal, Never expose Temporal directly to most developer)
+|		|
+|		|-testing (Testing kit)
+|		|
+|		|-autoconfiguration
+|		|
+|
+|
+|----starters
+		
+		|--micronaut-ddd-starter
+		|--micronaut-cqrs-starter
+		|--micronaut-outbox-starter
+		|--micronaut-platform-starter
+
+
+Business Logic = Service Team Responsibilty
+Technical Patterns = Platform Responsibility
+
+
+we are not building Generic Repository Framework, Generic Aggregate Framework, Generic Crud Engine, Generic Domain service Framework, Abstract Entity Manager
+
+and lets say a Domain bounded context want to be devloped using this platform they follow
+app-context 
+|
+|--domain (Pure Business)
+|		|---aggregates
+|		|-- entity
+|		|--valueobjects
+|		|--event
+|		|--policy
+|		|--exception
+|--application (Use cases)
+|		|---command
+|		|-- query
+|		|--workflow
+|--adapters
+|		|---inbound
+|		|-- outbound
+|
+|--projectios
+|
+|--bootstrap
+
